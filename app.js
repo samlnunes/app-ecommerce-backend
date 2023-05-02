@@ -11,7 +11,9 @@ const cors = require("cors");
 const app = express();
 const port = 8383;
 
-app.use(cors());
+app.use(cors({
+  origin: 'https://app-ecommerce-frontend.vercel.app/'
+}));
 app.options('*', cors());
 app.use(bodyParser.json());
 
