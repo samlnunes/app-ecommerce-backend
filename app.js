@@ -12,6 +12,7 @@ const app = express();
 const port = 8383;
 
 app.use(cors());
+app.options('*', cors());
 app.use(bodyParser.json());
 
 app.post("/users", async (req, res) => {
