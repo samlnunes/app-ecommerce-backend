@@ -2,6 +2,8 @@ const { db } = require("../firebase");
 const jwt = require("jsonwebtoken");
 const { customAlphabet } = require("nanoid");
 
+process.env.JWT_SECRET = "12cc250d428a06c54c1f210212b1919e8399b16309a7288d8fb03c9ea96a6f9b";
+
 async function createUser(email, password, name, address, phone) {
   const generateUserId = customAlphabet("0123456789", 5);
 
@@ -53,6 +55,7 @@ async function createUser(email, password, name, address, phone) {
 }
 
 async function loginUser(email, password) {
+  console.log("process.env.JWT_SECRET", process.env.JWT_SECRET)
   try {
     const user = await db
       .collection("users")
@@ -86,7 +89,7 @@ async function loginUser(email, password) {
     if (error.status === 401) {
       throw error;
     }
-    throw error;
+    throw { status: 500, message: "Erro ao efetuar login, tente novamente!" };
   }
 }
 
