@@ -86,7 +86,7 @@ async function loginUser(email, password) {
     if (error.status === 401) {
       throw error;
     }
-    throw { status: 500, message: "Erro ao criar usuário, tente novamente!" };
+    throw error;
   }
 }
 
